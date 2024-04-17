@@ -1,0 +1,13 @@
+@host = https://localhost
+@port = 7142
+@Restaurants.API_HostAddress = https://localhost:7142
+
+POST {{Restaurants.API_HostAddress}}/api/weatherforecast/generate?count=-3
+Content-Type: application/json
+
+{
+  "min": -23,
+  "max": 23
+}
+
+###
