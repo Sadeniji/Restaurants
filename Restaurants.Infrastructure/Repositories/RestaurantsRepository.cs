@@ -9,7 +9,7 @@ public class RestaurantsRepository(RestaurantsDbContext dbContext) : IRestaurant
 {
     public async Task<IEnumerable<Restaurant>> GetAllAsync(CancellationToken cancellation)
     {
-        return await dbContext.Restaurants.ToListAsync(cancellation);
+        return await dbContext.Restaurants.Include(d => d.Dishes).ToListAsync(cancellation);
     }
 
     public async Task<Restaurant?> GetByIdAsync(int id, CancellationToken cancellationToken)
