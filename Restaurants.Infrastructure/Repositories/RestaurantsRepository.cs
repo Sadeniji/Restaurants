@@ -11,4 +11,9 @@ public class RestaurantsRepository(RestaurantsDbContext dbContext) : IRestaurant
     {
         return await dbContext.Restaurants.ToListAsync(cancellation);
     }
+
+    public async Task<Restaurant?> GetByIdAsync(int id, CancellationToken cancellationToken)
+    {
+        return await dbContext.Restaurants.Include(d => d.Dishes).FirstOrDefaultAsync(r => r.Id == id, cancellationToken);
+    }
 }
