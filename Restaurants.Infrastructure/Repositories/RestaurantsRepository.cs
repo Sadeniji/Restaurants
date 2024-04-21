@@ -16,4 +16,11 @@ public class RestaurantsRepository(RestaurantsDbContext dbContext) : IRestaurant
     {
         return await dbContext.Restaurants.Include(d => d.Dishes).FirstOrDefaultAsync(r => r.Id == id, cancellationToken);
     }
+
+    public async Task<int> Create(Restaurant newRestaurant, CancellationToken cancellationToken)
+    {
+        await dbContext.Restaurants.AddAsync(newRestaurant, cancellationToken);
+        await dbContext.SaveChangesAsync(cancellationToken);
+        return newRestaurant.Id;
+    }
 }

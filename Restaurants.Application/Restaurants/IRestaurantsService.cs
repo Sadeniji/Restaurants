@@ -7,4 +7,5 @@ public interface IRestaurantsService
 {
     Task<IEnumerable<RestaurantDto>> GetAllRestaurants(CancellationToken cancellation);
     Task<RestaurantDto?> GetRestaurantById(int id, CancellationToken cancellationToken);
+    Task<int> CreateRestaurant(CreateRestaurantDto createRestaurantDto, CancellationToken cancellationToken);
 }
