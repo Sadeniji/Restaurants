@@ -8,4 +8,6 @@ public interface IRestaurantsRepository
 
     Task<Restaurant?> GetByIdAsync(int id, CancellationToken cancellationToken);
     Task<int> Create(Restaurant newRestaurant, CancellationToken cancellationToken);
+    Task Delete(Restaurant restaurant, CancellationToken cancellationToken);
+
 }

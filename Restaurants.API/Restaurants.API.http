@@ -16,7 +16,7 @@ Content-Type: application/json
 {
   "Name": "Spicy Delights",
   "Description": "A culinary experience like no other",
-  "Category": "Fine Dining",
+  "Category": "Indian",
   "HasDelivery": true,
   "COntactEmail": "info@gourmetdelights.com",
   "ContactNumber": "555-123-4567",
@@ -25,4 +25,7 @@ Content-Type: application/json
   "PostalCode": "54-321"
 }
 
+###
+DELETE {{Restaurants.API_HostAddress}}/api/restaurants/4
+Content-Type: application/json
 ###
