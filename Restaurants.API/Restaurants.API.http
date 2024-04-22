@@ -26,6 +26,17 @@ Content-Type: application/json
 }
 
 ###
-DELETE {{Restaurants.API_HostAddress}}/api/restaurants/4
+DELETE {{Restaurants.API_HostAddress}}/api/restaurants/3
 Content-Type: application/json
+###
+
+PATCH {{Restaurants.API_HostAddress}}/api/restaurants/1
+Content-Type: application/json
+
+{
+  "Name": "Spicy Delights",
+  "Description": "A culinary experience like no other",
+  "HasDelivery": true
+}
+
 ###

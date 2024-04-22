@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Restaurants.Application.Restaurants.Commands.CreateRestaurant;
 using Restaurants.Application.Restaurants.Commands.DeleteRestaurant;
+using Restaurants.Application.Restaurants.Commands.UpdateRestaurant;
 using Restaurants.Application.Restaurants.Queries.GetAllRestaurants;
 using Restaurants.Application.Restaurants.Queries.GetRestaurantId;
 
@@ -34,8 +35,16 @@ namespace Restaurants.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteRestaurant([FromRoute] int id, CancellationToken cancellationToken)
         {
-            var response = await mediator.Send(new DeleteRestaurantCommand(id), cancellationToken);
-            return response  ? Ok(response) : NotFound();
+            var isDeeleted = await mediator.Send(new DeleteRestaurantCommand(id), cancellationToken);
+            return isDeeleted  ? Ok(isDeeleted) : NotFound();
+        }
+        
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> CreateRestaurant([FromRoute] int id, [FromBody] UpdateRestaurantCommand updateRestaurantCommand, CancellationToken cancellationToken)
+        {
+            updateRestaurantCommand = updateRestaurantCommand with { Id = id };
+            var isUpdated = await mediator.Send(updateRestaurantCommand, cancellationToken);
+            return isUpdated ? NoContent() : NotFound();
         }
     }
 }
