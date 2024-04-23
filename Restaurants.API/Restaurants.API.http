@@ -14,8 +14,8 @@ POST {{Restaurants.API_HostAddress}}/api/restaurants
 Content-Type: application/json
 
 {
-  "Name": "Spicy Delights",
-  "Description": "A culinary experience like no other",
+  "Name": "Spicy Delights2",
+  "Description": "A culinary experience like no other2",
   "Category": "Indian",
   "HasDelivery": true,
   "COntactEmail": "info@gourmetdelights.com",
