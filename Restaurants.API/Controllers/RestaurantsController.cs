@@ -21,11 +21,8 @@ namespace Restaurants.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<RestaurantDto?>> GetRestaurantById([FromRoute] int id, CancellationToken cancellationToken)
-        {
-            var restaurant = await mediator.Send(new GetRestaurantByIdQuery(id), cancellationToken);
-            return restaurant is null ? NotFound() : Ok(restaurant);
-        }
+        public async Task<ActionResult<RestaurantDto?>> GetRestaurantById([FromRoute] int id, CancellationToken cancellationToken) 
+            => Ok(await mediator.Send(new GetRestaurantByIdQuery(id), cancellationToken));
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -41,8 +38,8 @@ namespace Restaurants.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> DeleteRestaurant([FromRoute] int id, CancellationToken cancellationToken)
         {
-            var isDeeleted = await mediator.Send(new DeleteRestaurantCommand(id), cancellationToken);
-            return isDeeleted  ? Ok(isDeeleted) : NotFound();
+            await mediator.Send(new DeleteRestaurantCommand(id), cancellationToken);
+            return NoContent();
         }
         
         [HttpPatch("{id}")]
@@ -51,8 +48,8 @@ namespace Restaurants.API.Controllers
         public async Task<IActionResult> CreateRestaurant([FromRoute] int id, [FromBody] UpdateRestaurantCommand updateRestaurantCommand, CancellationToken cancellationToken)
         {
             updateRestaurantCommand = updateRestaurantCommand with { Id = id };
-            var isUpdated = await mediator.Send(updateRestaurantCommand, cancellationToken);
-            return isUpdated ? NoContent() : NotFound();
+            await mediator.Send(updateRestaurantCommand, cancellationToken);
+            return NoContent();
         }
     }
 }
