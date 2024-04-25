@@ -26,17 +26,38 @@ Content-Type: application/json
 }
 
 ###
-DELETE {{Restaurants.API_HostAddress}}/api/restaurants/3
+DELETE {{Restaurants.API_HostAddress}}/api/restaurants/2
 Content-Type: application/json
 ###
 
-PATCH {{Restaurants.API_HostAddress}}/api/restaurants/1
+PATCH {{Restaurants.API_HostAddress}}/api/restaurants/3
 Content-Type: application/json
 
 {
-  "Name": "Spicy Delights",
-  "Description": "A culinary experience like no other",
+  "Name": "Spicy Delights for restaurant3",
+  "Description": "A culinary experience like no other for restaurant 3",
   "HasDelivery": true
 }
+
+###
+
+POST {{Restaurants.API_HostAddress}}/api/restaurants/3/dishes
+Content-Type: application/json
+
+{
+  "Name": "Spaghetti Bolognese for new testing",
+  "Description": "Classic Italian paste dish with rich meat sauce for new testing",
+  "Price": 12.99,
+  "KiloCalories": 750
+}
+
+###
+
+
+GET {{Restaurants.API_HostAddress}}/api/restaurants/3/dishes/5
+
+###
+
+DELETE {{Restaurants.API_HostAddress}}/api/restaurants/3/dishes
 
 ###
