@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Restaurants.Application.Dishes.Commands.CreateDish;
 using Restaurants.Application.Dishes.Commands.DeleteDish;
@@ -6,14 +7,17 @@ using Restaurants.Application.Dishes.Commands.DeleteDishes;
 using Restaurants.Application.Dishes.Dtos;
 using Restaurants.Application.Dishes.Queries.GetAllDishes;
 using Restaurants.Application.Dishes.Queries.GetDishByRestaurantId;
+using Restaurants.Infrastructure.Authorization;
 
 namespace Restaurants.API.Controllers;
 
 [Route("api/restaurants/{restaurantId}/dishes")]
 [ApiController]
+[Authorize]
 public class DishesController(IMediator _mediator) : Controller
 {
     [HttpGet]
+    [Authorize(Policy = PolicyName.AtLeast20Years)]
     //[ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<DishDto>))]
     public async Task<ActionResult<IEnumerable<DishDto>>> GetAll([FromRoute] int restaurantId, CancellationToken cancellationToken)
     {
