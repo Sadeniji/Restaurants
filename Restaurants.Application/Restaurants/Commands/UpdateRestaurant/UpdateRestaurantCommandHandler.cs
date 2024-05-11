@@ -1,14 +1,17 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.Extensions.Logging;
+using Restaurants.Domain.Constants;
 using Restaurants.Domain.Exceptions;
+using Restaurants.Domain.Interfaces;
 using Restaurants.Domain.Repositories;
 
 namespace Restaurants.Application.Restaurants.Commands.UpdateRestaurant;
 
 public class UpdateRestaurantCommandHandler(ILogger<UpdateRestaurantCommand> logger, 
                                             IRestaurantsRepository restaurantsRepository,
-                                            IMapper mapper) : IRequestHandler<UpdateRestaurantCommand>
+                                            IMapper mapper,
+                                            IRestaurantAuthorizationService restaurantAuthorizationService) : IRequestHandler<UpdateRestaurantCommand>
 {
     public async Task Handle(UpdateRestaurantCommand command, CancellationToken cancellationToken)
     {
@@ -19,7 +22,12 @@ public class UpdateRestaurantCommandHandler(ILogger<UpdateRestaurantCommand> log
         {
             throw new NotFoundException(nameof(restaurant), command.Id.ToString());
         }
-        
+
+        if (!restaurantAuthorizationService.Authorize(restaurant, ResourceOperation.Update))
+        {
+            throw new ForbiddenException();
+        }
+
         mapper.Map(command, restaurant);
         await restaurantsRepository.SaveChanges(cancellationToken);
     }

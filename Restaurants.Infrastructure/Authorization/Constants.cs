@@ -10,4 +10,5 @@ public static class PolicyName
 {
     public const string HasNationality = "HasNationality";
     public const string AtLeast20Years = "AtLeast20Years";
+    public static string OwnersWithAtLeast2Restaurants = "OwnersWithAtLeast2Restaurants";
 }
