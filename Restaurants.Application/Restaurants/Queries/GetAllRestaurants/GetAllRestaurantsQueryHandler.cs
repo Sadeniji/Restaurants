@@ -18,6 +18,8 @@ public class GetAllRestaurantsQueryHandler(ILogger<GetAllRestaurantsQueryHandler
             request.SearchPhrase, 
             request.PageSize, 
             request.PageNumber,
+            request.SortBy,
+            request.SortDirection,
             cancellationToken);
 
         var restaurantsDto = mapper.Map<IEnumerable<RestaurantDto>>(restaurants.restaurants);
