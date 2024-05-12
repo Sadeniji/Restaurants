@@ -20,9 +20,9 @@ namespace Restaurants.API.Controllers
         [HttpGet]
         [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<RestaurantDto>))]
-        public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
+        public async Task<IActionResult> GetAll([FromQuery] GetAllRestaurantsQuery query, CancellationToken cancellationToken)
         {
-            return Ok(await mediator.Send(new GetAllRestaurantsQuery(), cancellationToken));
+            return Ok(await mediator.Send(query, cancellationToken));
         }
 
         [HttpGet("{id}")]
