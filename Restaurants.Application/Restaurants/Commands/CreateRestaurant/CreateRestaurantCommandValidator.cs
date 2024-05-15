@@ -9,10 +9,7 @@ public class CreateRestaurantCommandValidator : AbstractValidator<CreateRestaura
     {
         RuleFor(dto => dto.Name)
             .Length(3, 100);
-
-        RuleFor(dto => dto.Description)
-            .NotEmpty().WithMessage("Description is required");
-
+        
         RuleFor(dto => dto.Category)
             .Must(_validCategories.Contains)
             .WithMessage("Invalid category. Please choose from the valid categories");
