@@ -2,14 +2,12 @@
 using Microsoft.AspNetCore.Mvc.Testing;
 using Xunit;
 using System.Net;
-using System.Net.Http.Json;
 using Microsoft.AspNetCore.Authorization.Policy;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Moq;
 using Restaurants.APITests;
-using Restaurants.Application.Restaurants.Dtos;
 using Restaurants.Domain.Entities;
 using Restaurants.Domain.Repositories;
 
